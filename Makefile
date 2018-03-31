@@ -36,7 +36,8 @@ ALL_IMAGES := \
 	v0.12/debian-papertrail:v0.12.33-debian-papertrail,v0.12-debian-papertrail,debian-papertrail \
 	v0.12/debian-graylog:v0.12.33-debian-graylog,v0.12-debian-graylog,debian-stable-graylog,debian-graylog \
 	v0.12/debian-papertrail:v0.12.33-debian-papertrail,v0.12-debian-papertrail,debian-papertrail \
-	v0.12/debian-kafka:v0.12.33-debian-kafka,v0.12-debian-kafka,debian-kafka
+	v0.12/debian-kafka:v0.12.33-debian-kafka,v0.12-debian-kafka,debian-kafka \
+	v0.12/alpine-hdash:v0.12.33-hdash,v0.12-hdash,stable-hdash,hdash \
 
 #	<Dockerfile>:<version>,<tag1>,<tag2>,...
 
@@ -223,11 +224,7 @@ plugins:
 #	make post-push-hook [DOCKERFILE=] [TAGS=t1,t2,...]
 
 post-push-hook:
-	mkdir -p docker-image/$(DOCKERFILE)/hooks
-	docker run --rm -i -v $(PWD)/templates/post_push.erb:/post_push.erb:ro \
-		ruby:alpine erb -U \
-			image_tags='$(TAGS)' \
-		/post_push.erb > docker-image/$(DOCKERFILE)/hooks/post_push
+	echo Skipping post-push-hook
 
 
 # Generate Dockerfile from template for all supported Docker images.
